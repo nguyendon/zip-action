@@ -2,6 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const archiver = require('archiver');
 const fs = require('fs');
+const path = require('path');
 
 try {
   const srcPath = core.getInput('src-path');
@@ -28,7 +29,14 @@ try {
  */
 function zipDirectory(sourceDir, outPath) {
   const archive = archiver('zip', { zlib: { level: 9 }});
-  const stream = fs.createWriteStream(outPath);
+  const formedPath = path.join(__dirname, outPath);
+  const outDir = path.dirname(formedPath);
+
+  if (!fs.existsSync(outDir)){
+    fs.mkdirSync(outDir);
+  }
+
+  const stream = fs.createWriteStream(formedPath);
 
   return new Promise((resolve, reject) => {
     archive
