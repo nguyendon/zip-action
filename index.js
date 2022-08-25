@@ -45,16 +45,7 @@ function zipDirectory(sourceDir, outPath) {
       .pipe(stream)
     ;
 
-    stream.on('close', () => {
-      if(fs.existsSync(formedPath)) {
-        console.log(`File written to ${formedPath}`)
-        resolve();
-      } else {
-        const errStr = `File could not be found at ${formedPath}`;
-        console.error(`File could not be found at ${formedPath}`)
-        reject(errStr);
-      }
-    });
+    stream.on('close', () => resolve());
     archive.finalize();
   });
 }
