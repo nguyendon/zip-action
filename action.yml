@@ -9,6 +9,10 @@ inputs:
     description: 'Destination of the resulting zip file'
     required: True
     default: './out.zip'
+  compression-level:
+    description: 'Compression Level'
+    required: False
+    default: '0'
 outputs:
   output:
     description: 'The output zip file'

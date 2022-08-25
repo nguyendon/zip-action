@@ -9,8 +9,9 @@ try {
   console.log(`Fetching ${srcPath}!`);
   const dest = core.getInput('dest');
   console.log(`Attempting to write to ${dest}...`);
+  const compressionLevel = core.getInput('compression-level');
 
-  zipDirectory(srcPath, dest)
+  zipDirectory(srcPath, dest, parseInt(compressionLevel))
     .then((res) => {
       core.setOutput('output', dest);
       console.log(`Success, output is written to ${dest}`);
@@ -25,10 +26,11 @@ try {
 /**
  * @param {String} sourceDir: /some/folder/to/compress
  * @param {String} outPath: /path/to/created.zip
+ * @param {number} compressionLevel: The zlib compresison level (0-9)
  * @returns {Promise}
  */
-function zipDirectory(sourceDir, outPath) {
-  const archive = archiver('zip', { zlib: { level: 9 }});
+function zipDirectory(sourceDir, outPath, compressionLevel) {
+  const archive = archiver('zip', { zlib: { level: compressionLevel }});
   const formedPath = path.join(process.cwd(), outPath);
   const outDir = path.dirname(formedPath);
 

@@ -12,6 +12,10 @@ This action zips up a directory.
 
 **Required** The output file
 
+### 'compression-level'
+
+The zlib compression level (0-9).
+
 ## Outputs
 
 ### `output`
