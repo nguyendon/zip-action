@@ -1,0 +1,17 @@
+name: 'Zip Action'
+description: 'A simple Github Action to zip a directory'
+inputs:
+  src-path:
+    description: 'Source path to zip'
+    required: True
+    default: './out'
+  dest:
+    description: 'Destination of the resulting zip file'
+    required: True
+    default: './out.zip'
+outputs:
+  output:
+    description: 'The output zip file'
+runs:
+  using: 'node16'
+  main: 'index.js'
