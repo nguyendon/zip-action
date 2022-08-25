@@ -29,7 +29,7 @@ try {
  */
 function zipDirectory(sourceDir, outPath) {
   const archive = archiver('zip', { zlib: { level: 9 }});
-  const formedPath = path.join(__dirname, outPath);
+  const formedPath = path.join(process.cwd(), outPath);
   const outDir = path.dirname(formedPath);
 
   if (!fs.existsSync(outDir)){
